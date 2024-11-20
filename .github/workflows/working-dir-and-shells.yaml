@@ -21,7 +21,7 @@ jobs:
         run: pwd
   
   display-wd-info-windows:
-    runs-on: windows-lasted
+    runs-on: windows-latest
     defaults:
       run:
         shell: pwsh
