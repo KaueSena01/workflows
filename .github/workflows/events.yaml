@@ -1,8 +1,28 @@
 name: Repository Events
 on:
+
   push:
+    branches:
+      - main
+      - master
+      - "feature/*" # matches feature/branch-name, does not match feature/branch/name
+      - "feature/**" # matches feature/branch-name and feature/branch/name
+      - "!feature/branch-name" # matches any branch except feature/branch-name
+    # branches-ignore:
+      # - feature/branch-name
+    tags:
+      - v1.* # matches v1.0, v1.1, ...
+      - "!v1.1.1" # matches any tag except v1.1.1
+    paths:
+      - "**.js" # matches any .js file in any directory
+      - "!app.js" # matches any .js file except app.js
   pull_request:
     types: [opened, assigned, reopened, synchronize]
+    branches:
+      - main
+      - master
+    paths:
+      - "**.js" # matches any .js file in any directory
   issues:
     types: [opened]
 
@@ -14,3 +34,7 @@ jobs:
           echo %GITHUB_SHA
           echo $GITHUB_REF
       - uses: actions/checkout@v4
+
+
+
+# https://docs.github.com/en/actions/writing-workflows/workflow-syntax-for-github-actions#filter-pattern-cheat-sheet
